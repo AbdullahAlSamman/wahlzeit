@@ -18,13 +18,14 @@ COPY gradlew /builder/gradlew
 # Test project
 RUN ./gradlew test
 
+
 # Build project (downloads Appengine SDK + builds + explode WAR)
 RUN ./gradlew appengineExplodeApp
 
 #########################################################
 # Second stage: image to run the application            #
 #########################################################
-FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+FROM adoptopenjdk/openjdk8-openj9:alpine-slim 
 
 RUN mkdir /app
 WORKDIR /app
