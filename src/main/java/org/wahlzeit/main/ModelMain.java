@@ -22,13 +22,7 @@ package org.wahlzeit.main;
 
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
-import org.wahlzeit.model.GlobalsManager;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoCaseManager;
-import org.wahlzeit.model.PhotoFactory;
-import org.wahlzeit.model.PhotoManager;
-import org.wahlzeit.model.User;
-import org.wahlzeit.model.UserManager;
+import org.wahlzeit.model.*;
 import org.wahlzeit.model.persistence.DatastoreAdapter;
 import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.services.LogBuilder;
@@ -45,88 +39,89 @@ import java.util.logging.Logger;
  */
 public abstract class ModelMain extends AbstractMain {
 
-	private static final Logger log = Logger.getLogger(ModelMain.class.getName());
+    private static final Logger log = Logger.getLogger(ModelMain.class.getName());
 
-	/**
-	 *
-	 */
-	protected void startUp(String rootDir) throws Exception {
-		super.startUp(rootDir);
-		log.info("AbstractMain.startUp completed");
+    /**
+     *
+     */
+    protected void startUp(String rootDir) throws Exception {
+        super.startUp(rootDir);
+        log.info("AbstractMain.startUp completed");
 
-		log.config(LogBuilder.createSystemMessage().addAction("load image storage").toString());
-		//GcsAdapter.Builder gcsAdapterBuilder = new GcsAdapter.Builder();
-		ImageStorage.setInstance(new DatastoreAdapter());
+        log.config(LogBuilder.createSystemMessage().addAction("load image storage").toString());
+        //GcsAdapter.Builder gcsAdapterBuilder = new GcsAdapter.Builder();
+        ImageStorage.setInstance(new DatastoreAdapter());
 
-		log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
-		GlobalsManager.getInstance().loadGlobals();
+        log.config(LogBuilder.createSystemMessage().addAction("load globals").toString());
+        GlobalsManager.getInstance().loadGlobals();
 
-		log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
-		UserManager.getInstance().init();
+        log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
+        UserManager.getInstance().init();
 
-		log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
-		PhotoFactory.initialize();
+        log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
+        FoodPhotoFactory.initialize();
 
-		log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-		PhotoManager.getInstance().init();
-	}
+        log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
+        FoodPhotoManager.getInstance().init();
+    }
 
 
-	/**
-	 *
-	 */
-	protected void shutDown() throws Exception {
-		saveAll();
+    /**
+     *
+     */
+    protected void shutDown() throws Exception {
+        saveAll();
 
-		super.shutDown();
-	}
+        super.shutDown();
+    }
 
-	/**
-	 *
-	 */
-	public void saveAll() throws IOException{
-		PhotoCaseManager.getInstance().savePhotoCases();
-		PhotoManager.getInstance().savePhotos();
-		UserManager.getInstance().saveClients();
-		GlobalsManager.getInstance().saveGlobals();
-	}
+    /**
+     *
+     */
+    public void saveAll() throws IOException {
+        PhotoCaseManager.getInstance().savePhotoCases();
+        FoodPhotoManager.getInstance().savePhotos();
+        UserManager.getInstance().saveClients();
+        GlobalsManager.getInstance().saveGlobals();
+    }
 
-	/**
-	 *
-	 */
-	protected void createUser(String userId, String nickName, String emailAddress, String photoDir) {
-		UserManager userManager = UserManager.getInstance();
-		User user = new User(userId, nickName, emailAddress);
+    /**
+     *
+     */
+    protected void createUser(String userId, String nickName, String emailAddress, String photoDir) {
+        UserManager userManager = UserManager.getInstance();
 
-		PhotoManager photoManager = PhotoManager.getInstance();
-		File photoDirFile = new File(photoDir);
-		FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");
-		File[] photoFiles = photoDirFile.listFiles(photoFileFilter);
+        User user = new User(userId, nickName, emailAddress);
 
-		if (photoFiles == null) {
-			return;
-		}
+        PhotoManager photoManager = PhotoManager.getInstance();
+        File photoDirFile = new File(photoDir);
+        FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");
+        File[] photoFiles = photoDirFile.listFiles(photoFileFilter);
 
-		log.info("Found " + photoFiles.length + " photo(s) in resource folder.");
+        if (photoFiles == null) {
+            return;
+        }
 
-		for (File photo : photoFiles) {
-			//TODO: change to datastore/cloud storage
-			try {
-				Image image = getImageFromFile(photo);
-				Photo newPhoto = photoManager.createPhoto(photo.getName(), image);
-				user.addPhoto(newPhoto);
-				userManager.addClient(user);
-			} catch (Exception e) {
-				log.warning("Unable to add photo: " + photo.getAbsoluteFile());
-			}
-		}
-	}
+        log.info("Found " + photoFiles.length + " photo(s) in resource folder.");
 
-	/**
-	 *
-	 */
-	private Image getImageFromFile(File file) throws IOException {
-		String photoPath = file.getAbsolutePath();
-		return ImagesServiceFactory.makeImage(Files.readAllBytes(Paths.get(photoPath)));
-	}
+        for (File photo : photoFiles) {
+            //TODO: change to datastore/cloud storage
+            try {
+                Image image = getImageFromFile(photo);
+                Photo newPhoto = photoManager.createPhoto(photo.getName(), image);
+                user.addPhoto(newPhoto);
+                userManager.addClient(user);
+            } catch (Exception e) {
+                log.warning("Unable to add photo: " + photo.getAbsoluteFile());
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    private Image getImageFromFile(File file) throws IOException {
+        String photoPath = file.getAbsolutePath();
+        return ImagesServiceFactory.makeImage(Files.readAllBytes(Paths.get(photoPath)));
+    }
 }

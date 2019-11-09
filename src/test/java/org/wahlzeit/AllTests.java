@@ -10,6 +10,7 @@ import org.wahlzeit.services.EmailServiceTestSuite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TellFriendTest.class,
+        FoodPhotoTest.class,
         DatastoreAdapterTest.class,
         AccessRightsTest.class,
         CoordinateTest.class,
