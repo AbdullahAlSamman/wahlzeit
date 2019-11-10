@@ -55,6 +55,13 @@ public class FoodPhotoFactory extends PhotoFactory {
     }
 
     /**
+     * @methodtype factory
+     */
+    public FoodPhoto createPhoto() {
+        return new FoodPhoto();
+    }
+
+    /**
      * Creates a new photo with the specified id
      */
     public FoodPhoto createPhoto(PhotoId id) {
