@@ -1,29 +1,29 @@
 package org.wahlzeit.model;
 
 public class Location {
-    private Coordinate coordinate;
+    private CartesianCoordinate cartesianCoordinate;
 
     /**
      * Constructor
      *
      * @param coordinate object to initiate location class
      */
-    public Location(Coordinate xyz) {
-        this.setCoordinate(xyz);
+    public Location(CartesianCoordinate xyz) {
+        this.setCartesianCoordinate(xyz);
     }
 
     /**
      * @methodtype get
      */
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public CartesianCoordinate getCartesianCoordinate() {
+        return cartesianCoordinate;
     }
 
     /**
      * @methodtype set
      */
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setCartesianCoordinate(CartesianCoordinate cartesianCoordinate) {
+        this.cartesianCoordinate = cartesianCoordinate;
     }
 
     /**
@@ -33,6 +33,6 @@ public class Location {
      * @return boolean true if they are equals
      */
     public boolean equals(Location loc) {
-        return this.getCoordinate().isEqual(loc.getCoordinate());
+        return this.getCartesianCoordinate().isEqual(loc.getCartesianCoordinate());
     }
 }
