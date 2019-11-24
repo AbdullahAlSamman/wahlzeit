@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 
 public abstract class AbstractCoordinate implements Coordinate {
 
-    public abstract double getCentralAngle();
 
-    public abstract double getCartesianDistance(Coordinate coordinate);
 
     /**
      * isEqual compare two coordinate points if they are the same.
