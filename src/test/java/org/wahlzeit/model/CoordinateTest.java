@@ -26,7 +26,7 @@ public class CoordinateTest {
     public void sphericIsEqual() {
         SphericCoordinate a = new SphericCoordinate(2.011542, 12.321215, 3.555125);
         SphericCoordinate b = new SphericCoordinate(2.011542, 12.321215, 3.555125);
-//        assertTrue(a.isEqual(b));
+        assertTrue(a.isEqual(b));
 
 
         a = new SphericCoordinate(2.011542, 12.321215, 3.555125);
@@ -55,6 +55,7 @@ public class CoordinateTest {
         a = new CartesianCoordinate(2.011542, 12.321215, 3.555125);
         b = new SphericCoordinate(12.980660771301823, 12.484335797069424, 12.321215);
         assertTrue(b.isEqual(a));
+
 
         a = new CartesianCoordinate(2.011542, 12.321215, 3.555125);
         b = new SphericCoordinate(2.011541, 12.321215, 3.555125);

@@ -1,8 +1,6 @@
 package org.wahlzeit.model;
 
-import java.math.BigDecimal;
-
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 
     protected double x;
     protected double y;
@@ -52,19 +50,6 @@ public class CartesianCoordinate implements Coordinate {
         return Math.sqrt(Math.pow(this.getX() - xyz.getX(), 2) + Math.pow(this.getY() - xyz.getY(), 2) + Math.pow(this.getZ() - xyz.getZ(), 2));
     }
 
-    /**
-     * isEqual compare two coordinate points if they are the same.
-     *
-     * @param coordinate point to compare with.
-     * @return true if the points are equal.
-     **/
-    @Override
-    public boolean isEqual(Coordinate coordinate) {
-        CartesianCoordinate t = coordinate.asCartesianCoordinate();
-        return doIsEqual(this.convertToBigD(t), this.convertToBigD(this));
-    }
-
-
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         return this;
@@ -96,41 +81,5 @@ public class CartesianCoordinate implements Coordinate {
         return 0;
     }
 
-    private boolean doIsEqual(BigDecimal[] pointA, BigDecimal[] pointB) {
-        if (pointA[0].compareTo(pointB[0]) == 0.0)
-            if (pointA[1].compareTo(pointB[1]) == 0.0)
-                if (pointA[2].compareTo(pointB[2]) == 0.0)
-                    return true;
-        return false;
-    }
-
-    /**
-     * convert values from double to BigDecimal
-     *
-     * @param xyz point
-     * @return array of BigDecimal in order x,y,z
-     **/
-    private BigDecimal[] convertToBigD(Coordinate xyz) {
-        BigDecimal[] result = null;
-        if (xyz instanceof CartesianCoordinate) {
-            CartesianCoordinate cc = xyz.asCartesianCoordinate();
-            result = new BigDecimal[]{
-                    new BigDecimal(cc.getX()),
-                    new BigDecimal(cc.getY()),
-                    new BigDecimal(cc.getZ())
-            };
-            return result;
-
-        } else if (xyz instanceof SphericCoordinate) {
-            SphericCoordinate sc = xyz.asSphericCoordinate();
-            result = new BigDecimal[]{
-                    new BigDecimal(sc.getPhi()),
-                    new BigDecimal(sc.getTheta()),
-                    new BigDecimal(sc.getRadius())
-            };
-            return result;
-        }
-        return result;
-    }
 
 }
