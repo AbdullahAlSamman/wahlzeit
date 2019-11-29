@@ -1,7 +1,7 @@
 package org.wahlzeit.model;
 
 public class Location {
-    private CartesianCoordinate cartesianCoordinate;
+    private Coordinate coordinate;
 
     /**
      * Constructor
@@ -9,21 +9,21 @@ public class Location {
      * @param coordinate object to initiate location class
      */
     public Location(CartesianCoordinate xyz) {
-        this.setCartesianCoordinate(xyz);
+        this.setCoordinate(xyz);
     }
 
     /**
      * @methodtype get
      */
-    public CartesianCoordinate getCartesianCoordinate() {
-        return cartesianCoordinate;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
     /**
      * @methodtype set
      */
-    public void setCartesianCoordinate(CartesianCoordinate cartesianCoordinate) {
-        this.cartesianCoordinate = cartesianCoordinate;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
     /**
@@ -33,6 +33,6 @@ public class Location {
      * @return boolean true if they are equals
      */
     public boolean equals(Location loc) {
-        return this.getCartesianCoordinate().isEqual(loc.getCartesianCoordinate());
+        return this.getCoordinate().isEqual(loc.getCoordinate());
     }
 }
