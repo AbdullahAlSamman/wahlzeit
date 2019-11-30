@@ -1,5 +1,8 @@
 package org.wahlzeit.model;
 
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
 public class CartesianCoordinate extends AbstractCoordinate {
 
     protected double x;
@@ -40,16 +43,6 @@ public class CartesianCoordinate extends AbstractCoordinate {
         this.z = z;
     }
 
-    /**
-     * calculate distance between two points using Cartesian distance
-     *
-     * @param xyz point.
-     * @return distance between the points.
-     **/
-    public double getDistance(CartesianCoordinate xyz) {
-        return Math.sqrt(Math.pow(this.getX() - xyz.getX(), 2) + Math.pow(this.getY() - xyz.getY(), 2) + Math.pow(this.getZ() - xyz.getZ(), 2));
-    }
-
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         return this;
@@ -63,17 +56,32 @@ public class CartesianCoordinate extends AbstractCoordinate {
      **/
     @Override
     public double getCartesianDistance(Coordinate coordinate) {
+        this.assertClassInvariants();
+        assertNotNull(coordinate);
         CartesianCoordinate c = coordinate.asCartesianCoordinate();
-        return Math.sqrt(Math.pow(this.getX() - c.getX(), 2) + Math.pow(this.getY() - c.getY(), 2) + Math.pow(this.getZ() - c.getZ(), 2));
+        assertNotNull(c);
+        c.assertClassInvariants();
+
+        double result = Math.sqrt(Math.pow(this.getX() - c.getX(), 2) + Math.pow(this.getY() - c.getY(), 2) + Math.pow(this.getZ() - c.getZ(), 2));
+
+        assertTrue(result >= 0);
+        return result;
     }
 
     @Override
     public SphericCoordinate asSphericCoordinate() {
         //not sure about the math
-        return new SphericCoordinate(
+        this.assertClassInvariants();
+
+        SphericCoordinate sc = new SphericCoordinate(
                 Math.sqrt(Math.pow(this.x, 2.0) + Math.pow(this.y, 2.0) + Math.pow(this.z, 2.0)),
                 Math.sqrt(Math.pow(this.x, 2.0) + Math.pow(this.y, 2.0)),
                 this.y);
+
+        assertNotNull(sc);
+        sc.assertClassInvariants();
+
+        return sc;
     }
 
     @Override
@@ -81,5 +89,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
         return 0;
     }
 
-
+    @Override
+    public void assertClassInvariants() {
+        assertNotNull(getX());
+        assertNotNull(getY());
+        assertNotNull(getZ());
+    }
 }

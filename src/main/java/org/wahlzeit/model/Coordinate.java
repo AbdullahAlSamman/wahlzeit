@@ -10,4 +10,6 @@ public interface Coordinate {
     public double getCartesianDistance(Coordinate coordinate);
 
     boolean isEqual(Coordinate coordinate);
+
+    void assertClassInvariants();
 }

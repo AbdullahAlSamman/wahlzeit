@@ -8,7 +8,7 @@ public class Location {
      *
      * @param coordinate object to initiate location class
      */
-    public Location(CartesianCoordinate xyz) {
+    public Location(Coordinate xyz) {
         this.setCoordinate(xyz);
     }
 

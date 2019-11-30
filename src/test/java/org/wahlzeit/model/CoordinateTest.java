@@ -12,7 +12,7 @@ public class CoordinateTest {
     public void getDistance() {
         CartesianCoordinate a = new CartesianCoordinate(2.0, 0.0, 1.0);
         CartesianCoordinate b = new CartesianCoordinate(-6.0, -5.0, -6.0);
-        assertEquals(a.getDistance(b), 11.0, 0.8);
+        assertEquals(a.getCartesianDistance(b), 11.0, 0.8);
     }
 
     @Test

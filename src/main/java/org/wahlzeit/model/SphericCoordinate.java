@@ -1,5 +1,7 @@
 package org.wahlzeit.model;
 
+import static junit.framework.TestCase.assertNotNull;
+
 public class SphericCoordinate extends AbstractCoordinate {
 
     public double getPhi() {
@@ -41,20 +43,31 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
-        return new CartesianCoordinate(
+
+        this.assertClassInvariants();
+
+        CartesianCoordinate sc = new CartesianCoordinate(
                 this.radius * Math.sin(this.phi) * Math.cos(this.theta),
                 this.radius * Math.sin(this.phi) * Math.sin(this.theta),
                 this.radius * Math.cos(this.phi)
         );
+        assertNotNull(sc);
+        sc.assertClassInvariants();
+
+        return sc;
     }
 
     @Override
     public double getCartesianDistance(Coordinate coordinate) {
-        return 0;
+        assertNotNull(coordinate);
+        CartesianCoordinate pointA = this.asCartesianCoordinate();
+        CartesianCoordinate pointB = coordinate.asCartesianCoordinate();
+        return pointA.getCartesianDistance(pointB);
     }
 
     @Override
     public SphericCoordinate asSphericCoordinate() {
+        assertClassInvariants();
         return this;
 
     }
@@ -63,5 +76,12 @@ public class SphericCoordinate extends AbstractCoordinate {
     public double getCentralAngle() {
         //TODO: lookup the math
         return 0;
+    }
+
+    @Override
+    public void assertClassInvariants() {
+        assertNotNull(getRadius());
+        assertNotNull(getPhi());
+        assertNotNull(getTheta());
     }
 }

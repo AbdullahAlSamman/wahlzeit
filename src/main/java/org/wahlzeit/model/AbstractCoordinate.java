@@ -1,5 +1,9 @@
 package org.wahlzeit.model;
 
+
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
 public abstract class AbstractCoordinate implements Coordinate {
 
     /**
@@ -9,17 +13,33 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @return true if the points are equal.
      **/
     public boolean isEqual(Coordinate coordinate) {
+
+        assertNotNull(coordinate);
+
         if (this instanceof CartesianCoordinate) {
             CartesianCoordinate newCoordinate = coordinate.asCartesianCoordinate();
+            newCoordinate.assertClassInvariants();
+            assertNotNull(newCoordinate);
+
             return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(newCoordinate));
         } else if (this instanceof SphericCoordinate) {
             SphericCoordinate newCoordinate = coordinate.asSphericCoordinate();
+            newCoordinate.assertClassInvariants();
+            assertNotNull(newCoordinate);
+
             return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(newCoordinate));
         }
         return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(coordinate));
     }
 
     private boolean doIsEqual(Double[] pointA, Double[] pointB) {
+
+        assertNotNull(pointA);
+        assertTrue(pointA.length == 3);
+
+        assertNotNull(pointB);
+        assertTrue(pointB.length == 3);
+
         if (pointA[0].compareTo(pointB[0]) != 0.0)
             return false;
         if (pointA[1].compareTo(pointB[1]) != 0.0)
@@ -37,6 +57,9 @@ public abstract class AbstractCoordinate implements Coordinate {
      **/
     private Double[] convertToDoubleArray(Coordinate xyz) {
         Double[] result = null;
+
+        assertNotNull(xyz);
+
         if (xyz instanceof CartesianCoordinate) {
             CartesianCoordinate cc = xyz.asCartesianCoordinate();
             result = new Double[]{
@@ -52,11 +75,20 @@ public abstract class AbstractCoordinate implements Coordinate {
                     sc.getRadius()
             };
         }
+
+        assertNotNull(result);
+
         return result;
     }
 
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+    public void assertClassInvariants() {
+        // no class invariants to test in here
+        return;
     }
 }
