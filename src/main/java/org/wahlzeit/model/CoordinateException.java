@@ -1,11 +1,20 @@
 package org.wahlzeit.model;
 
 public class CoordinateException extends Exception {
-    public CoordinateException() {
-        super();
+    private String source;
+    private String message;
+
+    public CoordinateException(String src, String message) {
+        super("Source: " + src + " , " + message);
+        this.source = src;
+        this.message = message;
     }
 
-    public CoordinateException(String message) {
-        super(message);
+    @Override
+    public String toString() {
+        return "CoordinateException{" +
+                "source='" + source + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

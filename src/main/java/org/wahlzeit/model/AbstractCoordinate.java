@@ -14,7 +14,8 @@ public abstract class AbstractCoordinate implements Coordinate {
      **/
     public boolean isEqual(Coordinate coordinate) throws CoordinateException {
 
-        assertNotNull(coordinate);
+        if (coordinate == null)
+            throw new CoordinateException("AbstractCoordinate.isEqual", "coordinate param is null");
 
         if (this instanceof CartesianCoordinate) {
             CartesianCoordinate newCoordinate = coordinate.asCartesianCoordinate();
@@ -32,12 +33,15 @@ public abstract class AbstractCoordinate implements Coordinate {
         return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(coordinate));
     }
 
-    private boolean doIsEqual(Double[] pointA, Double[] pointB) {
+    private boolean doIsEqual(Double[] pointA, Double[] pointB) throws CoordinateException {
 
-        assertNotNull(pointA);
+
+        if (pointA == null || pointA.length > 3 || pointA.length < 3)
+            throw new CoordinateException("AbstractCoordinate.doIsEqual", "point A param is null or has less or more values");
         assertTrue(pointA.length == 3);
 
-        assertNotNull(pointB);
+        if (pointB == null || pointB.length > 3 || pointB.length < 3)
+            throw new CoordinateException("AbstractCoordinate.doIsEqual", "point b param is null or has less or more values");
         assertTrue(pointB.length == 3);
 
         if (pointA[0].compareTo(pointB[0]) != 0.0)
@@ -55,32 +59,30 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @param xyz point
      * @return array of BigDecimal in order x,y,z
      **/
-    private Double[] convertToDoubleArray(Coordinate xyz) {
+    private Double[] convertToDoubleArray(Coordinate xyz) throws CoordinateException {
         Double[] result = null;
 
-        assertNotNull(xyz);
+        if (xyz == null)
+            throw new CoordinateException("AbstractCoordinate.convertToDoubleArray", "coordinate param is null");
 
-        try {
-            if (xyz instanceof CartesianCoordinate) {
-                CartesianCoordinate cc = xyz.asCartesianCoordinate();
-                result = new Double[]{
-                        cc.getX(),
-                        cc.getY(),
-                        cc.getZ()
-                };
-            } else if (xyz instanceof SphericCoordinate) {
-                SphericCoordinate sc = xyz.asSphericCoordinate();
-                result = new Double[]{
-                        sc.getPhi(),
-                        sc.getTheta(),
-                        sc.getRadius()
-                };
-            }
-
-            assertNotNull(result);
-        } catch (CoordinateException e) {
-            e.printStackTrace();
+        if (xyz instanceof CartesianCoordinate) {
+            CartesianCoordinate cc = xyz.asCartesianCoordinate();
+            result = new Double[]{
+                    cc.getX(),
+                    cc.getY(),
+                    cc.getZ()
+            };
+        } else if (xyz instanceof SphericCoordinate) {
+            SphericCoordinate sc = xyz.asSphericCoordinate();
+            result = new Double[]{
+                    sc.getPhi(),
+                    sc.getTheta(),
+                    sc.getRadius()
+            };
         }
+
+        if (result == null)
+            throw new CoordinateException("AbstractCoordinate.convertToDoubleArray", "result is null");
 
         return result;
     }

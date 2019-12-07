@@ -57,14 +57,16 @@ public class CartesianCoordinate extends AbstractCoordinate {
     @Override
     public double getCartesianDistance(Coordinate coordinate) throws CoordinateException {
         this.assertClassInvariants();
-        assertNotNull(coordinate);
+        if (coordinate == null)
+            throw new CoordinateException("CartesianCoordinate.getCartesianDistance", "coordinate pram is null");
+
         CartesianCoordinate c = coordinate.asCartesianCoordinate();
         assertNotNull(c);
         c.assertClassInvariants();
 
         double result = Math.sqrt(Math.pow(this.getX() - c.getX(), 2) + Math.pow(this.getY() - c.getY(), 2) + Math.pow(this.getZ() - c.getZ(), 2));
 
-        assertTrue(result >= 0);
+        assertTrue(Math.abs(result) >= 0); //Logical check if the distance is bigger than zero
         return result;
     }
 
