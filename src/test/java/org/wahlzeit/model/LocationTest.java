@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 public class LocationTest {
 
     @Test
-    public void testEquals() {
+    public void testEquals() throws CoordinateException {
         Location locA = new Location(new CartesianCoordinate(2.011542, 12.321215, 3.555125));
         Location locB = new Location(new CartesianCoordinate(2.011542, 12.321215, 3.555125));
         assertTrue(locA.equals(locB));

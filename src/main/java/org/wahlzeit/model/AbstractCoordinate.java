@@ -12,7 +12,7 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @param coordinate point to compare with.
      * @return true if the points are equal.
      **/
-    public boolean isEqual(Coordinate coordinate) {
+    public boolean isEqual(Coordinate coordinate) throws CoordinateException {
 
         assertNotNull(coordinate);
 
@@ -60,23 +60,27 @@ public abstract class AbstractCoordinate implements Coordinate {
 
         assertNotNull(xyz);
 
-        if (xyz instanceof CartesianCoordinate) {
-            CartesianCoordinate cc = xyz.asCartesianCoordinate();
-            result = new Double[]{
-                    cc.getX(),
-                    cc.getY(),
-                    cc.getZ()
-            };
-        } else if (xyz instanceof SphericCoordinate) {
-            SphericCoordinate sc = xyz.asSphericCoordinate();
-            result = new Double[]{
-                    sc.getPhi(),
-                    sc.getTheta(),
-                    sc.getRadius()
-            };
-        }
+        try {
+            if (xyz instanceof CartesianCoordinate) {
+                CartesianCoordinate cc = xyz.asCartesianCoordinate();
+                result = new Double[]{
+                        cc.getX(),
+                        cc.getY(),
+                        cc.getZ()
+                };
+            } else if (xyz instanceof SphericCoordinate) {
+                SphericCoordinate sc = xyz.asSphericCoordinate();
+                result = new Double[]{
+                        sc.getPhi(),
+                        sc.getTheta(),
+                        sc.getRadius()
+                };
+            }
 
-        assertNotNull(result);
+            assertNotNull(result);
+        } catch (CoordinateException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }

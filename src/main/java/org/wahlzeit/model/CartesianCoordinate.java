@@ -55,7 +55,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
      * @return distance between the points.
      **/
     @Override
-    public double getCartesianDistance(Coordinate coordinate) {
+    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException {
         this.assertClassInvariants();
         assertNotNull(coordinate);
         CartesianCoordinate c = coordinate.asCartesianCoordinate();

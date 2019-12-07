@@ -58,7 +58,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public double getCartesianDistance(Coordinate coordinate) {
+    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException {
         assertNotNull(coordinate);
         CartesianCoordinate pointA = this.asCartesianCoordinate();
         CartesianCoordinate pointB = coordinate.asCartesianCoordinate();

@@ -6,7 +6,7 @@ public class Location {
     /**
      * Constructor
      *
-     * @param coordinate object to initiate location class
+     * @param xyz coordinate object to initiate location class
      */
     public Location(Coordinate xyz) {
         this.setCoordinate(xyz);
@@ -29,10 +29,10 @@ public class Location {
     /**
      * check if location coordinates are equals
      *
-     * @param Location object
+     * @param loc object
      * @return boolean true if they are equals
      */
-    public boolean equals(Location loc) {
+    public boolean equals(Location loc) throws CoordinateException {
         return this.getCoordinate().isEqual(loc.getCoordinate());
     }
 }
