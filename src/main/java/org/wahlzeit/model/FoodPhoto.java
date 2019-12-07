@@ -2,32 +2,32 @@ package org.wahlzeit.model;
 
 public class FoodPhoto extends Photo {
 
-    private double Price;
-    private String Resturant;
-    private String Type;
+    private double price;
+    private String restaurant;
+    private String type;
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(double price) {
-        Price = price;
+        this.price = price;
     }
 
-    public String getResturant() {
-        return Resturant;
+    public String getRestaurant() {
+        return restaurant;
     }
 
-    public void setResturant(String resturant) {
-        Resturant = resturant;
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
     }
 
     /**
