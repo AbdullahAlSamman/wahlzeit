@@ -7,8 +7,8 @@ public class FoodPhoto extends Photo {
     private String type;
 
     public String getType() throws FoodException {
-        if(type == null)
-            throw new FoodException("");
+        if (type == null)
+            throw new FoodException("FoodPhoto.getType", "type is null");
         return type;
     }
 
@@ -16,7 +16,9 @@ public class FoodPhoto extends Photo {
         this.type = type;
     }
 
-    public double getPrice() {
+    public double getPrice() throws FoodException {
+        if (Double.isNaN(price))
+            throw new FoodException("FoodPhoto.getPrice", "price is null");
         return price;
     }
 
@@ -24,7 +26,9 @@ public class FoodPhoto extends Photo {
         this.price = price;
     }
 
-    public String getRestaurant() {
+    public String getRestaurant() throws FoodException {
+        if (restaurant == null)
+            throw new FoodException("FoodPhoto.getRestaurant", "restaurant is null");
         return restaurant;
     }
 
@@ -43,6 +47,6 @@ public class FoodPhoto extends Photo {
      * Constructor
      */
     public FoodPhoto(PhotoId id) {
-        super();
+        super(id);
     }
 }
