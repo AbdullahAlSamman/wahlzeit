@@ -47,7 +47,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
     public double getCartesianDistance(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException {
         this.assertClassInvariants();
         if (coordinate == null)
-            throw new CoordinateException("CartesianCoordinate.getCartesianDistance", "coordinate pram is null");
+            throw new CoordinateException(getClass().getName() + " .getCartesianDistance", "coordinate pram is null");
 
         CartesianCoordinate c = coordinate.asCartesianCoordinate();
         assertNotNull(c);

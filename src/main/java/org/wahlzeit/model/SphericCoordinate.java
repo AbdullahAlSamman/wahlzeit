@@ -49,7 +49,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     @Override
     public double getCartesianDistance(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException {
         if (coordinate == null)
-            throw new CoordinateException("SphericCoordinate.getCartesianDistance", "coordinate param is null");
+            throw new CoordinateException(this.getClass().getName() + ".getCartesianDistance", "coordinate param is null");
 
         CartesianCoordinate pointA = this.asCartesianCoordinate();
         CartesianCoordinate pointB = coordinate.asCartesianCoordinate();
