@@ -22,18 +22,18 @@ public abstract class AbstractCoordinate implements Coordinate {
             newCoordinate.assertClassInvariants();
             assertNotNull(newCoordinate);
 
-            return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(newCoordinate));
+            return doIsEqual(this.convertToValueArray(this), this.convertToValueArray(newCoordinate));
         } else if (this instanceof SphericCoordinate) {
             SphericCoordinate newCoordinate = coordinate.asSphericCoordinate();
             newCoordinate.assertClassInvariants();
             assertNotNull(newCoordinate);
 
-            return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(newCoordinate));
+            return doIsEqual(this.convertToValueArray(this), this.convertToValueArray(newCoordinate));
         }
-        return doIsEqual(this.convertToDoubleArray(this), this.convertToDoubleArray(coordinate));
+        return doIsEqual(this.convertToValueArray(this), this.convertToValueArray(coordinate));
     }
 
-    private boolean doIsEqual(Double[] pointA, Double[] pointB) throws CoordinateException {
+    private boolean doIsEqual(Value[] pointA, Value[] pointB) throws CoordinateException {
 
 
         if (pointA == null || pointA.length > 3 || pointA.length < 3)
@@ -44,12 +44,10 @@ public abstract class AbstractCoordinate implements Coordinate {
             throw new CoordinateException(getClass().getName() + ".doIsEqual", "point b param is null or has less or more values");
         assertTrue(pointB.length == 3);
 
-        if (pointA[0].compareTo(pointB[0]) != 0.0)
-            return false;
-        if (pointA[1].compareTo(pointB[1]) != 0.0)
-            return false;
-        if (pointA[2].compareTo(pointB[2]) != 0.0)
-            return false;
+        for (int i = 0; i < 3; i++) {
+            if (!pointA[i].equals(pointB[i]))
+                return false;
+        }
         return true;
     }
 
@@ -59,25 +57,25 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @param xyz point
      * @return array of BigDecimal in order x,y,z
      **/
-    private Double[] convertToDoubleArray(Coordinate xyz) throws CoordinateException, CloneNotSupportedException {
-        Double[] result = null;
+    private Value[] convertToValueArray(Coordinate xyz) throws CoordinateException, CloneNotSupportedException {
+        Value[] result = null;
 
         if (xyz == null)
             throw new CoordinateException(getClass().getName() + ".convertToDoubleArray", "coordinate param is null");
 
         if (xyz instanceof CartesianCoordinate) {
             CartesianCoordinate cc = xyz.asCartesianCoordinate();
-            result = new Double[]{
-                    cc.getX().getValue(),
-                    cc.getY().getValue(),
-                    cc.getZ().getValue()
+            result = new Value[]{
+                    cc.getX(),
+                    cc.getY(),
+                    cc.getZ()
             };
         } else if (xyz instanceof SphericCoordinate) {
             SphericCoordinate sc = xyz.asSphericCoordinate();
-            result = new Double[]{
-                    sc.getPhi().getValue(),
-                    sc.getTheta().getValue(),
-                    sc.getRadius().getValue()
+            result = new Value[]{
+                    sc.getPhi(),
+                    sc.getTheta(),
+                    sc.getRadius()
             };
         }
 
