@@ -32,7 +32,7 @@ public class Location {
      * @param loc object
      * @return boolean true if they are equals
      */
-    public boolean equals(Location loc) throws CoordinateException {
+    public boolean equals(Location loc) throws CoordinateException, CloneNotSupportedException {
         return this.getCoordinate().isEqual(loc.getCoordinate());
     }
 }

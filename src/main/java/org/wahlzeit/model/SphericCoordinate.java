@@ -4,52 +4,41 @@ import static junit.framework.TestCase.assertNotNull;
 
 public class SphericCoordinate extends AbstractCoordinate {
 
-    public double getPhi() {
-        return phi;
+    private final Value phi;
+    private final Value theta;
+    private final Value radius;
+
+    public Value getPhi() throws CloneNotSupportedException {
+        return (Value) phi.clone();
     }
 
-    public void setPhi(double phi) {
-        this.phi = phi;
+    public Value getTheta() throws CloneNotSupportedException {
+        return (Value) theta.clone();
     }
 
-    public double getTheta() {
-        return theta;
+    public Value getRadius() throws CloneNotSupportedException {
+        return (Value) radius.clone();
     }
 
-    public void setTheta(double theta) {
-        this.theta = theta;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-
-    private double phi;
-    private double theta;
-    private double radius;
 
     /**
      * Constructor
      */
-    public SphericCoordinate(double phi, double theta, double radius) {
-        this.phi = phi;
-        this.radius = radius;
-        this.theta = theta;
+    public SphericCoordinate(Value phi, Value theta, Value radius) throws CloneNotSupportedException {
+        this.phi = (Value) phi.clone();
+        this.radius = (Value) radius.clone();
+        this.theta = (Value) theta.clone();
     }
 
     @Override
-    public CartesianCoordinate asCartesianCoordinate() {
+    public CartesianCoordinate asCartesianCoordinate() throws CloneNotSupportedException {
 
         this.assertClassInvariants();
 
         CartesianCoordinate sc = new CartesianCoordinate(
-                this.radius * Math.sin(this.phi) * Math.cos(this.theta),
-                this.radius * Math.sin(this.phi) * Math.sin(this.theta),
-                this.radius * Math.cos(this.phi)
+                new Value(this.radius.getValue() * Math.sin(this.phi.getValue()) * Math.cos(this.theta.getValue())),
+                new Value(this.radius.getValue() * Math.sin(this.phi.getValue()) * Math.sin(this.theta.getValue())),
+                new Value(this.radius.getValue() * Math.cos(this.phi.getValue()))
         );
         assertNotNull(sc);
         sc.assertClassInvariants();
@@ -58,7 +47,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException {
+    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException {
         if (coordinate == null)
             throw new CoordinateException("SphericCoordinate.getCartesianDistance", "coordinate param is null");
 
@@ -68,7 +57,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public SphericCoordinate asSphericCoordinate() {
+    public SphericCoordinate asSphericCoordinate() throws CloneNotSupportedException {
         assertClassInvariants();
         return this;
 
@@ -81,7 +70,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public void assertClassInvariants() {
+    public void assertClassInvariants() throws CloneNotSupportedException {
         assertNotNull(getRadius());
         assertNotNull(getPhi());
         assertNotNull(getTheta());

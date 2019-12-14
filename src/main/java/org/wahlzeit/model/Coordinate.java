@@ -1,15 +1,15 @@
 package org.wahlzeit.model;
 
 public interface Coordinate {
-    public CartesianCoordinate asCartesianCoordinate() throws CoordinateException;
+    public CartesianCoordinate asCartesianCoordinate() throws CoordinateException, CloneNotSupportedException;
 
-    public SphericCoordinate asSphericCoordinate() throws CoordinateException;
+    public SphericCoordinate asSphericCoordinate() throws CoordinateException, CloneNotSupportedException;
 
     public double getCentralAngle();
 
-    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException;
+    public double getCartesianDistance(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException;
 
-    boolean isEqual(Coordinate coordinate) throws CoordinateException;
+    boolean isEqual(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException;
 
-    void assertClassInvariants();
+    void assertClassInvariants() throws CloneNotSupportedException;
 }

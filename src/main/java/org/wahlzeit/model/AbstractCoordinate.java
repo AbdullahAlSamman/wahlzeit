@@ -12,7 +12,7 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @param coordinate point to compare with.
      * @return true if the points are equal.
      **/
-    public boolean isEqual(Coordinate coordinate) throws CoordinateException {
+    public boolean isEqual(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException {
 
         if (coordinate == null)
             throw new CoordinateException("AbstractCoordinate.isEqual", "coordinate param is null");
@@ -59,7 +59,7 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @param xyz point
      * @return array of BigDecimal in order x,y,z
      **/
-    private Double[] convertToDoubleArray(Coordinate xyz) throws CoordinateException {
+    private Double[] convertToDoubleArray(Coordinate xyz) throws CoordinateException, CloneNotSupportedException {
         Double[] result = null;
 
         if (xyz == null)
@@ -68,16 +68,16 @@ public abstract class AbstractCoordinate implements Coordinate {
         if (xyz instanceof CartesianCoordinate) {
             CartesianCoordinate cc = xyz.asCartesianCoordinate();
             result = new Double[]{
-                    cc.getX(),
-                    cc.getY(),
-                    cc.getZ()
+                    cc.getX().getValue(),
+                    cc.getY().getValue(),
+                    cc.getZ().getValue()
             };
         } else if (xyz instanceof SphericCoordinate) {
             SphericCoordinate sc = xyz.asSphericCoordinate();
             result = new Double[]{
-                    sc.getPhi(),
-                    sc.getTheta(),
-                    sc.getRadius()
+                    sc.getPhi().getValue(),
+                    sc.getTheta().getValue(),
+                    sc.getRadius().getValue()
             };
         }
 
@@ -93,7 +93,7 @@ public abstract class AbstractCoordinate implements Coordinate {
     }
 
     @Override
-    public void assertClassInvariants() {
+    public void assertClassInvariants() throws CloneNotSupportedException {
         // no class invariants to test in here
         return;
     }
