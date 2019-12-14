@@ -15,7 +15,7 @@ public abstract class AbstractCoordinate implements Coordinate {
     public boolean isEqual(Coordinate coordinate) throws CoordinateException, CloneNotSupportedException {
 
         if (coordinate == null)
-            throw new CoordinateException("AbstractCoordinate.isEqual", "coordinate param is null");
+            throw new CoordinateException(getClass().getName() + ".isEqual", "coordinate param is null");
 
         if (this instanceof CartesianCoordinate) {
             CartesianCoordinate newCoordinate = coordinate.asCartesianCoordinate();
@@ -37,11 +37,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 
 
         if (pointA == null || pointA.length > 3 || pointA.length < 3)
-            throw new CoordinateException("AbstractCoordinate.doIsEqual", "point A param is null or has less or more values");
+            throw new CoordinateException(getClass().getName() + ".doIsEqual", "point A param is null or has less or more values");
         assertTrue(pointA.length == 3);
 
         if (pointB == null || pointB.length > 3 || pointB.length < 3)
-            throw new CoordinateException("AbstractCoordinate.doIsEqual", "point b param is null or has less or more values");
+            throw new CoordinateException(getClass().getName() + ".doIsEqual", "point b param is null or has less or more values");
         assertTrue(pointB.length == 3);
 
         if (pointA[0].compareTo(pointB[0]) != 0.0)
@@ -63,7 +63,7 @@ public abstract class AbstractCoordinate implements Coordinate {
         Double[] result = null;
 
         if (xyz == null)
-            throw new CoordinateException("AbstractCoordinate.convertToDoubleArray", "coordinate param is null");
+            throw new CoordinateException(getClass().getName() + ".convertToDoubleArray", "coordinate param is null");
 
         if (xyz instanceof CartesianCoordinate) {
             CartesianCoordinate cc = xyz.asCartesianCoordinate();
@@ -82,7 +82,7 @@ public abstract class AbstractCoordinate implements Coordinate {
         }
 
         if (result == null)
-            throw new CoordinateException("AbstractCoordinate.convertToDoubleArray", "result is null");
+            throw new CoordinateException(getClass().getName() + ".convertToDoubleArray", "result is null");
 
         return result;
     }

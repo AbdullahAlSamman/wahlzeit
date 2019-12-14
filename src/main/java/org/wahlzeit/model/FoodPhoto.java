@@ -8,7 +8,7 @@ public class FoodPhoto extends Photo {
 
     public String getType() throws FoodException {
         if (type == null)
-            throw new FoodException("FoodPhoto.getType", "type is null");
+            throw new FoodException(this.getClass().getName() + ".getType", "type is null");
         return type;
     }
 
@@ -18,7 +18,7 @@ public class FoodPhoto extends Photo {
 
     public double getPrice() throws FoodException {
         if (Double.isNaN(price))
-            throw new FoodException("FoodPhoto.getPrice", "price is null");
+            throw new FoodException(this.getClass().getName() + ".getPrice", "price is null");
         return price;
     }
 
@@ -28,7 +28,7 @@ public class FoodPhoto extends Photo {
 
     public String getRestaurant() throws FoodException {
         if (restaurant == null)
-            throw new FoodException("FoodPhoto.getRestaurant", "restaurant is null");
+            throw new FoodException(this.getClass().getName() + ".getRestaurant", "restaurant is null");
         return restaurant;
     }
 

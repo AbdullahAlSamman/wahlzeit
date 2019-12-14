@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 
-public class Value extends Object {
+public class Value implements Cloneable {
 
     private double Value;
 
