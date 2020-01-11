@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@PatternInstance(
+        patternName = "Singleton",
+        participants = {"ConcretePhotoManager", "AbstractObjectManager"}
+)
 public class FoodPhotoManager extends PhotoManager {
 
     /**

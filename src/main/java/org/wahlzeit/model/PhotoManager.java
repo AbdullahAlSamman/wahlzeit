@@ -58,7 +58,7 @@ public class PhotoManager extends ObjectManager {
     /**
      *
      */
-    public PhotoManager() {
+    protected PhotoManager() {
         photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
     }
 
