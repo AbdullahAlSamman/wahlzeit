@@ -23,6 +23,7 @@ import org.wahlzeit.services.EmailServiceTestSuite;
         UserStatusTest.class,
         ValueTest.class,
         EmailServiceTestSuite.class,
+        FoodManagerTest.class,
 })
 public class AllTests {
 }
