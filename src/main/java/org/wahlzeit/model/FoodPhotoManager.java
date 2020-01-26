@@ -31,7 +31,7 @@ public class FoodPhotoManager extends PhotoManager {
     /**
      *
      */
-    public FoodPhoto getPhoto(PhotoId id) {
+    public static FoodPhoto getPhoto(PhotoId id) {
         return instance.getPhotoFromId(id);
     }
 
@@ -63,10 +63,10 @@ public class FoodPhotoManager extends PhotoManager {
     /**
      *
      */
-    public FoodPhoto createPhoto(String filename, Image uploadedImage) throws Exception {
+    public static FoodPhoto createPhoto(String filename, Image uploadedImage) throws Exception {
         PhotoId id = PhotoId.getNextId();
         FoodPhoto result = FoodPhotoUtil.createPhoto(filename, id, uploadedImage);
-        addPhoto(result);
+        addPhoto((Photo) result);
         return result;
     }
 
@@ -104,5 +104,12 @@ public class FoodPhotoManager extends PhotoManager {
      */
     public void addPhoto(FoodPhoto photo) throws IOException {
         super.addPhoto(photo);
+    }
+
+    /**
+     * @methodtype get
+     */
+    public FoodPhoto getPhoto(String id) {
+        return getPhoto(PhotoId.getIdFromString(id));
     }
 }

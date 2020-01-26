@@ -48,7 +48,7 @@ public class PhotoManager extends ObjectManager {
     /**
      * In-memory cache for photos
      */
-    protected Map<PhotoId, Photo> photoCache = new HashMap<PhotoId, Photo>();
+    protected static Map<PhotoId, Photo> photoCache = new HashMap<PhotoId, Photo>();
 
     /**
      *
@@ -79,14 +79,14 @@ public class PhotoManager extends ObjectManager {
     /**
      *
      */
-    public boolean hasPhoto(PhotoId id) {
+    public static boolean hasPhoto(PhotoId id) {
         return getPhoto(id) != null;
     }
 
     /**
      *
      */
-    public Photo getPhoto(PhotoId id) {
+    public static Photo getPhoto(PhotoId id) {
         return instance.getPhotoFromId(id);
     }
 
@@ -122,7 +122,7 @@ public class PhotoManager extends ObjectManager {
      * @methodtype command
      * @methodproperties primitive
      */
-    protected void doAddPhoto(Photo myPhoto) {
+    protected static void doAddPhoto(Photo myPhoto) {
         photoCache.put(myPhoto.getId(), myPhoto);
     }
 
@@ -329,7 +329,7 @@ public class PhotoManager extends ObjectManager {
     /**
      *
      */
-    public Photo createPhoto(String filename, Image uploadedImage) throws Exception {
+    public static Photo createPhoto(String filename, Image uploadedImage) throws Exception {
         PhotoId id = PhotoId.getNextId();
         Photo result = PhotoUtil.createPhoto(filename, id, uploadedImage);
         addPhoto(result);
@@ -339,7 +339,7 @@ public class PhotoManager extends ObjectManager {
     /**
      * @methodtype command
      */
-    public void addPhoto(Photo photo) throws IOException {
+    public static void addPhoto(Photo photo) throws IOException {
         PhotoId id = photo.getId();
         assertIsNewPhoto(id);
         doAddPhoto(photo);
@@ -350,7 +350,7 @@ public class PhotoManager extends ObjectManager {
     /**
      * @methodtype assertion
      */
-    protected void assertIsNewPhoto(PhotoId id) {
+    protected static void assertIsNewPhoto(PhotoId id) {
         if (hasPhoto(id)) {
             throw new IllegalStateException("Photo already exists!");
         }

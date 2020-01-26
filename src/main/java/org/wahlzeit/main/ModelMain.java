@@ -62,7 +62,7 @@ public abstract class ModelMain extends AbstractMain {
         FoodPhotoFactory.initialize();
 
         log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-        FoodPhotoManager.getInstance().init();
+        FoodPhotoManager.getInstance().init(); //Class instantiation
     }
 
 
@@ -80,7 +80,7 @@ public abstract class ModelMain extends AbstractMain {
      */
     public void saveAll() throws IOException {
         PhotoCaseManager.getInstance().savePhotoCases();
-        FoodPhotoManager.getInstance().savePhotos();
+        FoodPhotoManager.getInstance().savePhotos(); //Class instantiation
         UserManager.getInstance().saveClients();
         GlobalsManager.getInstance().saveGlobals();
     }
@@ -93,7 +93,7 @@ public abstract class ModelMain extends AbstractMain {
 
         User user = new User(userId, nickName, emailAddress);
 
-        PhotoManager photoManager = PhotoManager.getInstance();
+        FoodPhotoManager photoManager = FoodPhotoManager.getInstance();  //Class instantiation
         File photoDirFile = new File(photoDir);
         FileFilter photoFileFilter = file -> file.getName().endsWith(".jpg");
         File[] photoFiles = photoDirFile.listFiles(photoFileFilter);
@@ -108,7 +108,7 @@ public abstract class ModelMain extends AbstractMain {
             //TODO: change to datastore/cloud storage
             try {
                 Image image = getImageFromFile(photo);
-                Photo newPhoto = photoManager.createPhoto(photo.getName(), image);
+                Photo newPhoto = PhotoManager.createPhoto(photo.getName(), image); //Class instantiation
                 user.addPhoto(newPhoto);
                 userManager.addClient(user);
             } catch (Exception e) {
