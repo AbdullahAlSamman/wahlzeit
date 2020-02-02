@@ -38,7 +38,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler {
 
 
     /**
-     *
+     * Client-Guest-Role
      */
     public PraisePhotoFormHandler() {
         initialize(PartUtil.PRAISE_PHOTO_FORM_FILE, AccessRights.GUEST);
@@ -55,7 +55,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected boolean isWellFormedPost(UserSession us, Map args) {
         String photoId = us.getAsString(args, Photo.ID);
@@ -64,7 +64,7 @@ public class PraisePhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandlePost(UserSession us, Map args) {
         String photoId = us.getAsString(args, Photo.ID);

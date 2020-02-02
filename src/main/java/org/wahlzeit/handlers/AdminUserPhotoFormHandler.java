@@ -37,18 +37,18 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler {
 
 
     /**
-     *
+     * Client-Admin-Role
      */
     public AdminUserPhotoFormHandler() {
         initialize(PartUtil.ADMIN_USER_PHOTO_FORM_FILE, AccessRights.ADMINISTRATOR);
     }
 
     /**
-     *
+     * Client-FoodPhoto-binds
      */
     protected void doMakeWebPart(UserSession us, WebPart part) {
         String photoId = (String) us.getSavedArg("photoId");
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(photoId); // Class instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(photoId); // Class instantiation
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
 
         part.addString("photoId", photoId);
@@ -58,11 +58,12 @@ public class AdminUserPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-binds
+     * Client-Admin-Role
      */
     protected String doHandlePost(UserSession us, Map args) {
         String id = us.getAndSaveAsString(args, "photoId");
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
 
         String tags = us.getAndSaveAsString(args, Photo.TAGS);
         photo.setTags(new Tags(tags));

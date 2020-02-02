@@ -72,7 +72,7 @@ public class SendEmailFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void doMakeWebPart(UserSession us, WebPart part) {
         Map args = us.getSavedArgs();
@@ -100,7 +100,7 @@ public class SendEmailFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandlePost(UserSession us, Map args) {
         String id = us.getAndSaveAsString(args, Photo.ID);

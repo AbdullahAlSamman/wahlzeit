@@ -45,7 +45,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void doMakeWebPart(UserSession us, WebPart part) {
         PhotoId photoId = us.getPhotoId();
@@ -78,7 +78,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandlePost(UserSession us, Map args) {
         String result = PartUtil.SHOW_USER_HOME_PAGE_NAME;

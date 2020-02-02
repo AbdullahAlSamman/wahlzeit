@@ -38,7 +38,7 @@ public class EditUserPhotoFormHandler extends AbstractWebFormHandler {
 
 
     /**
-     *
+     * Client-Admin-Role
      */
     public EditUserPhotoFormHandler() {
         initialize(PartUtil.EDIT_USER_PHOTO_FORM_FILE, AccessRights.USER);
@@ -52,7 +52,7 @@ public class EditUserPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-binds
      */
     protected void doMakeWebPart(UserSession us, WebPart part) {
         Map<String, Object> args = us.getSavedArgs();
@@ -60,7 +60,7 @@ public class EditUserPhotoFormHandler extends AbstractWebFormHandler {
         part.addStringFromArgs(args, UserSession.MESSAGE);
 
         String id = us.getAsString(args, Photo.ID);
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
 
         part.addString(Photo.ID, id);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
@@ -74,20 +74,20 @@ public class EditUserPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-binds
      */
     protected boolean isWellFormedPost(UserSession us, Map args) {
         String id = us.getAsString(args, Photo.ID);
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
         return (photo != null) && us.isPhotoOwner(photo);
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandlePost(UserSession us, Map args) {
         String id = us.getAndSaveAsString(args, Photo.ID);
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); // Class instantiation
 
         String tags = us.getAndSaveAsString(args, Photo.TAGS);
         photo.setTags(new Tags(tags));

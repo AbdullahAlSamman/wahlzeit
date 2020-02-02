@@ -6,6 +6,7 @@ import com.google.appengine.api.images.ImagesServiceFactory;
 public class FoodPhotoUtil extends PhotoUtil {
     /**
      * @methodtype creation
+     * Client-FoodPhoto-Binds
      */
     public static FoodPhoto createPhoto(String filename, PhotoId id, Image uploadedImage) throws Exception {
         FoodPhoto result = FoodPhotoFactory.getInstance().createPhoto(id);

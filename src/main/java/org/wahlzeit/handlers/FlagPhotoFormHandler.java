@@ -41,7 +41,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler {
 
 
     /**
-     *
+     * Client-Admin-Role
      */
     public FlagPhotoFormHandler() {
         initialize(PartUtil.FLAG_PHOTO_FORM_FILE, AccessRights.GUEST);
@@ -55,14 +55,14 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void doMakeWebPart(UserSession us, WebPart part) {
         Map args = us.getSavedArgs();
         part.addStringFromArgs(args, UserSession.MESSAGE);
 
         String id = us.getAsString(args, Photo.ID);
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); //Class Instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); //Class Instantiation
         part.addString(Photo.ID, id);
         part.addString(Photo.THUMB, getPhotoThumb(us, photo));
         part.maskAndAddStringFromArgsWithDefault(args, PhotoCase.FLAGGER, us.getClient().getEmailAddress().asString());
@@ -71,7 +71,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler {
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandlePost(UserSession us, Map args) {
         String id = us.getAndSaveAsString(args, Photo.ID);
@@ -91,7 +91,7 @@ public class FlagPhotoFormHandler extends AbstractWebFormHandler {
             return PartUtil.FLAG_PHOTO_PAGE_NAME;
         }
 
-        FoodPhoto photo = (FoodPhoto) FoodPhotoManager.getInstance().getPhoto(id); //Class Instantiation
+        FoodPhoto photo = FoodPhotoManager.getInstance().getPhoto(id); //Class Instantiation
         photo.setStatus(photo.getStatus().asFlagged(true));
         AsyncTaskExecutor.savePhotoAsync(id);
 

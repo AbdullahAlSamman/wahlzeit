@@ -82,7 +82,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected Writable makeAdminUserPhoto(UserSession us) {
         WebFormHandler handler = getFormHandler(PartUtil.NULL_FORM_NAME);
@@ -137,7 +137,7 @@ public class ShowAdminPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-binds
      */
     protected String performAdminUserPhotoRequest(UserSession us, Map args) {
         String photoId = us.getAndSaveAsString(args, "photoId");

@@ -41,7 +41,8 @@ import java.util.Map;
 public class Photo extends DataObject {
 
     /**
-     *
+     * Client-DataObject-Collaboration
+     * Client-Photo-Collaboration
      */
     public static final String IMAGE = "image";
     public static final String THUMB = "thumb";
@@ -70,7 +71,7 @@ public class Photo extends DataObject {
     protected PhotoId id = null;
 
     /**
-     *
+     * Client-Owner-Role
      */
     protected String ownerId;
 
@@ -82,7 +83,7 @@ public class Photo extends DataObject {
     transient protected Map<PhotoSize, Image> images = new ArrayMap<PhotoSize, Image>();
 
     /**
-     *
+     * Client-Owner-Role
      */
     protected boolean ownerNotifyAboutPraise = false;
     protected EmailAddress ownerEmailAddress = EmailAddress.EMPTY;

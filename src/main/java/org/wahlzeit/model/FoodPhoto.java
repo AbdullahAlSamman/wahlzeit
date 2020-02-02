@@ -1,7 +1,11 @@
 package org.wahlzeit.model;
 
 public class FoodPhoto extends Photo {
-
+    /**
+     * Client-FoodPhoto-Collaboration
+     * Client-Food-Binds
+     * Client-FoodManager-Binds
+     */
     private Food food;
     private FoodManager foodManager;
 

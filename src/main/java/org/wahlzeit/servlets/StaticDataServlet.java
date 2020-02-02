@@ -63,6 +63,8 @@ public class StaticDataServlet extends AbstractServlet {
      * <p>
      * Loads image either from the <@link>PhotoManager</@link> or from the <@link>ImageStorage</@link>. If image does
      * not exist, null is returned.
+     * <p>
+     * Client-FoodPhoto-Binds
      */
     private Image getImage(String photoId, int size) {
         Image image = null;

@@ -41,7 +41,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected String doHandleGet(UserSession us, String link, Map args) {
         FoodPhoto photo = null;
@@ -85,7 +85,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void makeWebPageBody(UserSession us, WebPart page) {
         PhotoId photoId = us.getPhotoId();
@@ -110,7 +110,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void makeLeftSidebar(UserSession us, WebPart page) {
         WritableList parts = new WritableList();
@@ -133,7 +133,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void makePhoto(UserSession us, WebPart page) {
         Client client = us.getClient();
@@ -163,7 +163,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void makePhotoCaption(UserSession us, WebPart page) {
         PhotoId photoId = us.getPhotoId();
@@ -188,7 +188,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
     }
 
     /**
-     *
+     * Client-FoodPhoto-Binds
      */
     protected void makeRightSidebar(UserSession us, WebPart page) {
         String handlerName = PartUtil.NULL_FORM_NAME;
